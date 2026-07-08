@@ -1,14 +1,13 @@
 import csv
 
-datos_taller = [
-    ["Producto", "Cantidad", "Precio_USD"],
-    ["Bujia Champion", "150", "30"],
-    ["Pastilla Freno", "20", "45"],
-    ["Filtro Aceite", "85", "12"]
-]
+try:
+    with open("inventario.csv", "r", newline="") as archivo_csv:
+        lector_datos = csv.reader(archivo_csv)
+        
+        print("📊 ¡CONEXIÓN TABULAR EXITOSA! Leyendo las filas del taller:\n")
+        
+        for fila in lector_datos:
+            print(f"Producto: {fila[0]} | Stock: {fila[1]} | Precio: ${fila[2]} USD")
 
-with open("inventario.csv", "w", newline="") as archivo_csv:
-    escritor = csv.writer(archivo_csv)
-    escritor.writerows(datos_taller)
-
-print("📊 ¡ÉXITO DE ARQUITECTURA! El archivo plano 'inventario.csv' ha sido grabado físicamente.")
+except FileNotFoundError:
+    print("🚨 ALERTA DE SEGURIDAD: El archivo 'inventario.csv' no existe en el disco duro.")
