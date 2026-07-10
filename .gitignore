@@ -1,3 +1,4 @@
 # Bloquear archivos confidenciales de ciberseguridad
 privado.txt
 *.xlsx
+.env
