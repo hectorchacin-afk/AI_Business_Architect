@@ -1,12 +1,11 @@
-print("🛡️ Iniciando escudo de sanitización perimetral...")
+print("🛡️ Iniciando escudo de validación numérica perimetral...")
 
-entrada_usuario = input("Ingrese el nombre del repuesto a registrar: ")
+entrada_stock = input("Ingrese la cantidad exacta de repuestos (Solo números): ")
 
-datos_limpios = entrada_usuario.strip().replace("'", "").replace('"', "").replace(";", "")
+stock_limpio = entrada_stock.strip()
 
-producto_seguro = datos_limpios.lower()
-
-if producto_seguro == "":
-    print("❌ ERROR DE CIBERSEGURIDAD: El ingreso no puede estar vacío o contener solo caracteres inválidos.")
+if stock_limpio.isdigit():
+    cantidad_segura = int(stock_limpio)
+    print(f"✅ VALIDACIÓN EXITOSA: El número {cantidad_segura} es seguro para meterlo a Excel.")
 else:
-    print(f"✅ DATO SANITIZADO Y SEGURO: '{producto_seguro}' listo para ser enviado a la nube.")
+    print("🚨 ERROR CRÍTICO DE ENTRADA: Se detectaron letras o caracteres inválidos. Operación bloqueada.")
