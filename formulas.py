@@ -1,24 +1,23 @@
 import openpyxl
+from datetime import datetime
+
+momento_actual = datetime.now()
+fecha_formateada = momento_actual.strftime("%Y-%m-%d %H:%M:%S")
+
+nombre_archivo = "Reporte_Cronologico.xlsx"
 
 libro = openpyxl.Workbook()
 hoja = libro.active
-hoja.title = "Calculos Taller"
+hoja.title = "Auditoria Temporal"
 
-hoja["A1"] = "Repuesto"
-hoja["B1"] = "Cantidad Stock"
+hoja["A1"] = "Fecha y Hora de Operación"
+hoja["B1"] = "Repuesto Registrado"
+hoja["C1"] = "Stock"
 
-hoja["A2"] = "Bujia Champion"
-hoja["B2"] = 150
+hoja["A2"] = fecha_formateada
+hoja["B2"] = "Filtro Aceite"
+hoja["C2"] = 85
 
-hoja["A3"] = "Filtro de Aire"
-hoja["B3"] = 85
+libro.save(nombre_archivo)
 
-hoja["A4"] = "Pastilla Freno"
-hoja["B4"] = 20
-
-hoja["A5"] = "TOTAL INVENTARIO:"
-hoja["B5"] = "=SUM(B2:B4)"
-
-libro.save("Reporte_Matematico.xlsx")
-
-print("📊 ¡ÉXITO DE AUTOMATIZACIÓN! El archivo 'Reporte_Matematico.xlsx' ha sido creado con fórmulas activas.")
+print(f"📊 ¡ÉXITO DE INFRAESTRUCTURA! Se creó '{nombre_archivo}' con estampa de tiempo real.")
