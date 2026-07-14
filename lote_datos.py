@@ -16,6 +16,9 @@ hoja.title = "Lote Produccion"
 fuente_header = Font(name="Arial", size=11, bold=True, color="FFFFFF")
 fondo_header = PatternFill(start_color="2C3E50", end_color="2C3E50", fill_type="solid")
 
+fondo_alerta = PatternFill(start_color="FADBD8", end_color="FADBD8", fill_type="solid")
+fuente_alerta = Font(name="Arial", size=10, bold=True, color="78281F")
+
 headers = ["Nombre del Repuesto", "Stock Actual", "Alerta de Sistema"]
 hoja.append(headers)
 
@@ -23,23 +26,24 @@ for celda in hoja[1]:
     celda.font = fuente_header
     celda.fill = fondo_header
 
-for repuesto in lote_repuestos:
-    hoja.append([repuesto.get("producto"), repuesto.get("cantidad"), repuesto.get("estatus")])
+print("📊 Procesando lote con inteligencia visual condicional...")
 
-print("📐 Iniciando cálculo geométrico de columnas en la RAM...")
+for repuesto in lote_repuestos:
+    estatus_actual = repuesto.get("estatus")
+    
+    hoja.append([repuesto.get("producto"), repuesto.get("cantidad"), estatus_actual])
+    
+    if estatus_actual == "CRITICO":
+        fila_actual = hoja.max_row
+        celda_alerta = hoja.cell(row=fila_actual, column=3)
+        
+        celda_alerta.fill = fondo_alerta
+        celda_alerta.font = fuente_alerta
 
 for columna in hoja.columns:
     letra_columna = columna[0].column_letter
-    
-    largo_maximo = 0
-    for celda in columna:
-        if celda.value:
-            largo_celda = len(str(celda.value))
-            if largo_celda > largo_maximo:
-                largo_maximo = largo_celda
-                
+    largo_maximo = max(len(str(celda.value or '')) for celda in columna)
     hoja.column_dimensions[letra_columna].width = largo_maximo + 4
 
-
 libro.save(nombre_archivo)
-print(f"✅ ¡HITO CONQUISTADO! Columnas auto-ajustadas y archivo '{nombre_archivo}' grabado.")
+print(f"🎨 ¡SISTEMA COMPLETADO! Alertas visuales inyectadas con éxito en '{nombre_archivo}'.")
