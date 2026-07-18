@@ -2,3 +2,4 @@
 privado.txt
 *.xlsx
 .env
+__pycache__/
