@@ -1,0 +1,1 @@
+[2026-07-20 16:34:54] FALLA EN VIVO: Conexión perdida con la base de datos central de Salesforce.
